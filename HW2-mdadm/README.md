@@ -1,18 +1,15 @@
 - скрипт для проверки
 
-#!/bin/bash
-# Скрипт для создания RAID-6
+# Скрипт для создания RAID-5
 
-# Зануляем суперблоки на случай, если на дисках была информация о прошлых RAID
+-Зануляем суперблоки на случай, если на дисках была информация о прошлых RAID
 echo "Zeroing superblocks on new disks..."
 mdadm --zero-superblock --force /dev/sd{b,c,d,e,f}
 
-# Создаем RAID-5 массив /dev/md0
-echo "Creating RAID-6 array /dev/md0..."
+-Создаем RAID-5 массив /dev/md0
+echo "Creating RAID-5 array /dev/md0..."
 mdadm --create --verbose /dev/md0 -l 5 -n 5 /dev/sd{b,c,d,e,f}
-# Ответьте 'y' на запрос о подтверждении, если он появится
-
-# Проверяем состояние массива
+-Проверяем состояние массива
 echo "RAID array status:"
 cat /proc/mdstat
 echo ""
